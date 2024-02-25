@@ -50,5 +50,3 @@ To run the MentorHakka application locally, follow these steps:
 Contributions to MentorHakka are welcome! If you have ideas for improvements, new features, or bug fixes, feel free to open an issue or submit a pull request.
 
 ---
-
-By [Abhijeet] • [asp616848@gmail.com] • [abhijeet.s.ug23@plaksha.edu.in] • [23f2004604@ds.study.iitm.ac.in] • [https://www.linkedin.com/in/abhijeet-shashwat-pathak-89b7b7204/]
