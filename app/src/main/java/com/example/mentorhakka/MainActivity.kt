@@ -78,8 +78,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenHome(modifier: Modifier = Modifier, navController: NavController, chatViewModel: ChatViewModel) {
@@ -124,7 +122,7 @@ fun ScreenHome(modifier: Modifier = Modifier, navController: NavController, chat
             if (userAim.isNotEmpty() && journalEntry.isNotEmpty()) {
                 Button(onClick = {
                     val formattedInput =
-                        "$journalEntry The preceding is my Journal entry from yesterday. The aim of my life right now is to anyhow achieve $userAim. Mentor me regarding the same. Also tell me what i should do tomorrow, to get better"
+                        "$journalEntry The preceding is my Journal entry from yesterday. The aim of my life right now is to anyhow achieve $userAim. Mentor me regarding the same. Also tell me what i should do tomorrow, to get better, and point out the mistakes that i have done"
                     val scope = MainScope() // Or any other appropriate coroutine scope
                     isLoading = true // Set loading state to true
 
@@ -240,7 +238,7 @@ val model = GenerativeModel(
     "gemini-1.0-pro-001",
     // Retrieve API key as an environmental variable defined in a Build Configuration
     // see https://github.com/google/secrets-gradle-plugin for further instructions
-    "AIzaSyDeh_2cVlwjg3HGhXB0BfxAjdb78ZRE_UQ",
+    "",
     generationConfig = generationConfig {
         temperature = 0.9f
         topK = 1
