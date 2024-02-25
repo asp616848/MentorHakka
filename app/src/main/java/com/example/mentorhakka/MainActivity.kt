@@ -87,7 +87,7 @@ fun ScreenHome(modifier: Modifier = Modifier, navController: NavController, chat
     var responseShow by remember { mutableStateOf("Your Personal Guide Will Write here!") }
     var isLoading by remember { mutableStateOf(false) } // State to track loading state
 
-    Column{
+    Column(modifier = modifier.fillMaxSize()) {
         TopAppBar(title = { Text("Home") }, modifier = Modifier.fillMaxWidth(),
             navigationIcon = {
                 IconButton(onClick = {
@@ -109,7 +109,8 @@ fun ScreenHome(modifier: Modifier = Modifier, navController: NavController, chat
                 label = { Text("Journal Entry") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 16.dp),
+                maxLines = 5
             )
             OutlinedTextField(
                 value = userAim,
@@ -117,7 +118,8 @@ fun ScreenHome(modifier: Modifier = Modifier, navController: NavController, chat
                 label = { Text("Aim") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 16.dp),
+                maxLines = 2
             )
             if (userAim.isNotEmpty() && journalEntry.isNotEmpty()) {
                 Button(onClick = {
@@ -238,7 +240,7 @@ val model = GenerativeModel(
     "gemini-1.0-pro-001",
     // Retrieve API key as an environmental variable defined in a Build Configuration
     // see https://github.com/google/secrets-gradle-plugin for further instructions
-    "",
+    "AIzaSyDeh_2cVlwjg3HGhXB0BfxAjdb78ZRE_UQ",
     generationConfig = generationConfig {
         temperature = 0.9f
         topK = 1
