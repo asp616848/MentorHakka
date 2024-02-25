@@ -13,8 +13,8 @@ MentorHakka is an Android application that serves as your personal guide and men
 
 ### Screenshots
 
-![Home Screen](/homescreen)
-![History Screen](/historyscreen)
+![Home Screen](/homescreen.png)
+![History Screen](/historyscreen.png)
 
 ### How it Works
 
