@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -73,6 +75,10 @@ class MainActivity : ComponentActivity() {
                         // Pass history responses to the history screen
                         HistoryScreen(historyResponses = chatViewModel.chatHistory, navController = navController)
                     }
+                    composable("analytics") {
+                        // Pass history responses to the history screen
+                        AnalyticsScreen(historyResponses = chatViewModel.chatHistory, navController = navController)
+                    }
                 }
             }
         }
@@ -90,14 +96,22 @@ fun ScreenHome(modifier: Modifier = Modifier, navController: NavController, chat
     Column(modifier = modifier.fillMaxSize()) {
         TopAppBar(title = { Text("Home") }, modifier = Modifier.fillMaxWidth(),
             navigationIcon = {
-                IconButton(onClick = {
-                    // Navigate to the history screen when the icon button is clicked
-                    navController.navigate("history")
-                }) {
-                    Icon(Icons.Filled.DateRange, contentDescription = "History")
+                Row(){
+                    IconButton(onClick = {
+                        // Navigate to the history screen when the icon button is clicked
+                        navController.navigate("history")
+                    }) {
+                        Icon(Icons.Filled.DateRange, contentDescription = "History")
+                    }
+                    IconButton(onClick = {
+                        navController.navigate("analytics")
+                    }) {
+                        Icon(Icons.Filled.AccountCircle, contentDescription = "analytics")
+                    }
                 }
             }
         )
+
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -170,9 +184,70 @@ fun ScreenHome(modifier: Modifier = Modifier, navController: NavController, chat
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AnalyticsScreen(modifier: Modifier = Modifier, historyResponses: List<Pair<String, String>> ,  navController: NavController) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .background(Color.LightGray, RoundedCornerShape(16.dp))
+            .padding(16.dp)
+    ) {
+        TopAppBar(title = { Text("Analytics") },
+            navigationIcon = {
+                IconButton(onClick = {
+                    // Navigate back when the navigation icon is clicked
+                    navController.popBackStack()
+                }) {
+                    Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                }
+            }
+        )
+        Text(
+            text = "Analytics",
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(Color.Gray)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
 
+        // Call the function to generate analytics based on history responses
+        val analytics = generateAnalytics(historyResponses)
 
+        Text(
+            text = analytics,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+    }
+}
+@Composable
+fun generateAnalytics(historyResponses: List<Pair<String, String>>): String {
+    // Process history responses and generate analytics
+    // For example, count the number of times goals were achieved or not
+    // You can customize this logic based on your requirements
 
+    var goalsAchieved = 0
+    var goalsNotAchieved = 0
+
+    for ((response, _) in historyResponses) {
+        // Analyze each response to determine if the goal was achieved
+        // For example, you can look for specific keywords indicating goal achievement
+        if (response.contains("achieved")) {
+            goalsAchieved++
+        } else {
+            goalsNotAchieved++
+        }
+    }
+    // Generate a string summarizing the analytics
+    return "Goals achieved: $goalsAchieved\nGoals not achieved: $goalsNotAchieved"
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HistoryScreen(modifier: Modifier = Modifier, historyResponses: List<Pair<String, String>> ,  navController: NavController) {
