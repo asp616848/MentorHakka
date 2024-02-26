@@ -10,11 +10,13 @@ MentorHakka is an Android application that serves as your personal guide and men
 - **Set Aims**: Users can define their goals and aims in life, providing context for the guidance they seek.
 - **Get Guidance**: By analyzing the user's journal entry and aim, the application generates personalized guidance and advice to help the user progress towards their goals.
 - **History**: Users can view a history of their past journal entries and the corresponding responses and guidance provided by the application.
+- **Analytics**: User can view analytics of all the journal entries and how they have improved on the self-growth path.
 
 ### Screenshots
 
-![Home Screen](/Screenshot from 2024-02-25 18-21-42.png)
-![History Screen](/screenshots/history_screen.png)
+![Home Screen](/homescreen.png)
+![History Screen](/historyscreen.png)
+![Analytics](/analytics.png)
 
 ### How it Works
 
@@ -48,5 +50,7 @@ To run the MentorHakka application locally, follow these steps:
 ### Contributing
 
 Contributions to MentorHakka are welcome! If you have ideas for improvements, new features, or bug fixes, feel free to open an issue or submit a pull request.
+
+By [Abhijeet] • [asp616848@gmail.com] • [abhijeet.s.ug23@plaksha.edu.in] • [23f2004604@ds.study.iitm.ac.in] • [https://www.linkedin.com/in/abhijeet-shashwat-pathak-89b7b7204/]
 
 ---
