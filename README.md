@@ -1,56 +1,41 @@
 # MentorHakka
- Plaksha University Hackathon Project
-## MentorHakka
 
-MentorHakka is an Android application that serves as your personal guide and mentor. It allows you to journal your thoughts, set aims for yourself, and receive guidance and advice based on your entries. The application utilizes a Generative Model powered by Google AI to provide personalized responses and suggestions.
+MentorHakka is a native Android app built during a **48-hour hackathon at Plaksha University**. It acts as a personal mentor: you write a daily journal entry and state a goal ("aim"), and the app uses Google's Gemini generative model to turn that into personalized mentorship and career-style guidance — what went well, what to fix, and what to do tomorrow.
 
-### Features
+## Features
 
-- **Journal Entry**: Users can input their daily journal entries, expressing their thoughts, feelings, and experiences.
-- **Set Aims**: Users can define their goals and aims in life, providing context for the guidance they seek.
-- **Get Guidance**: By analyzing the user's journal entry and aim, the application generates personalized guidance and advice to help the user progress towards their goals.
-- **History**: Users can view a history of their past journal entries and the corresponding responses and guidance provided by the application.
-- **Analytics**: User can view analytics of all the journal entries and how they have improved on the self-growth path.
+- **Journal Entry** — capture a free-text entry describing your day, thoughts, or challenges.
+- **Aim** — state the goal you're currently working toward, used as context for the AI.
+- **Get Guidance** — sends the journal entry + aim to the Gemini model, which returns mentorship advice, mistakes to correct, and next-day action items.
+- **History** — browse past entries alongside the guidance the app generated for them, with timestamps.
+- **Analytics** — a simple breakdown of how many past responses indicate an achieved vs. unachieved goal (keyword-based on the "achieved" string in stored responses).
 
-### Screenshots
+## Tech Stack
 
-![Home Screen](/homescreen.png)
-![History Screen](/historyscreen.png)
-![Analytics](/analytics.png)
+- **Kotlin** on native **Android**, UI built entirely with **Jetpack Compose** (Material 3).
+- **Jetpack Navigation Compose** for screen navigation (Home / History / Analytics).
+- **ViewModel** (`ChatViewModel`) to hold chat/journal history in memory for the session.
+- **Google AI Client SDK** (`com.google.ai.client.generativeai:generativeai`) calling the **Gemini** model (`gemini-1.0-pro-001`) to generate guidance.
+- Min SDK 24, target/compile SDK 34.
 
-### How it Works
+## Getting Started
 
-1. **Home Screen**: Upon opening the app, users are presented with the home screen where they can input their journal entry and aim.
-   - Users can navigate to the history screen to view past entries and responses.
-   - Once the user provides a journal entry and aim, they can request guidance.
+1. Clone the repository and open it in **Android Studio**.
+2. Let Gradle sync (Gradle Kotlin DSL, `build.gradle.kts`).
+3. Supply a Gemini API key: the `GenerativeModel` instance in `MainActivity.kt` currently takes an empty API key string — replace it with your own key from [Google AI Studio](https://aistudio.google.com/), ideally injected via a Gradle secrets/BuildConfig mechanism (e.g. the [secrets-gradle-plugin](https://github.com/google/secrets-gradle-plugin)) rather than hard-coding it.
+4. Run the app on an emulator or physical device (minimum Android 7.0 / API 24).
 
-2. **Generating Guidance**: When the user requests guidance, the application sends the journal entry and aim to the Generative Model API.
-   - The model processes the input, considering factors such as the user's aim and the content of their journal entry.
-   - It generates a personalized response tailored to the user's needs and goals.
+## Project Structure
 
-3. **Displaying Response**: The generated response is displayed on the home screen, providing the user with guidance, advice, and suggestions for improvement.
-   - The response is based on the analysis of the user's input and aims to assist them in their personal growth journey.
+- `app/src/main/java/com/example/mentorhakka/MainActivity.kt` — app entry point, navigation graph, and all three screens (Home, History, Analytics).
+- `app/src/main/java/com/example/mentorhakka/ChatViewModel.kt` — in-memory store of journal responses and their dates.
+- `app/src/main/java/com/example/mentorhakka/ui/theme/` — Compose theme (colors, typography).
 
-4. **History Screen**: Users can access the history screen to review past journal entries and the corresponding responses provided by the application.
-   - This feature allows users to reflect on their progress over time and revisit previous guidance as needed.
+## Notes
 
-### Setup Instructions
+- This was built as a hackathon project, so history and analytics are held in memory for the current app session (via `ChatViewModel`) rather than persisted to disk or a backend.
+- Screenshots of the Home, History, and Analytics screens are included in the repo root (`homescreen.png`, `historyscreen.png`, `analytics.png`).
 
-To run the MentorHakka application locally, follow these steps:
+## Contributing
 
-1. Clone the repository to your local machine.
-2. Open the project in Android Studio.
-3. Build and run the application on an Android device or emulator.
-
-### Dependencies
-
-- **Compose UI**: Jetpack Compose is used for building the user interface of the application, providing a modern and declarative way to create UI components.
-- **Google AI Client**: The application leverages the Generative Model provided by Google AI to generate personalized responses and guidance for users.
-
-### Contributing
-
-Contributions to MentorHakka are welcome! If you have ideas for improvements, new features, or bug fixes, feel free to open an issue or submit a pull request.
-
-By [Abhijeet] • [asp616848@gmail.com] • [abhijeet.s.ug23@plaksha.edu.in] • [23f2004604@ds.study.iitm.ac.in] • [https://www.linkedin.com/in/abhijeet-shashwat-pathak-89b7b7204/]
-
----
+Contributions, issues, and pull requests are welcome.
